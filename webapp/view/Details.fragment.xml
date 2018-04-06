@@ -7,7 +7,7 @@
 				<QuickViewGroupElement label="Purchase Price" value="{/purchasePrice}"/>
 				<QuickViewGroupElement label="Status" value="{/status}"/>
 				<QuickViewGroupElement label="Temperature" value="{/temperature}"/>
-				<QuickViewGroupElement label="Estimated hours before maintenance is necessaty" value="{/estimatedTol}"/>
+				<QuickViewGroupElement label="Estimated TOL (hours)" value="{/estimatedTol}"/>
 			</QuickViewGroup>
 		</QuickViewPage>
 	</QuickView>
