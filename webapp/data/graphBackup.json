@@ -1,0 +1,583 @@
+{
+    "nodes": [
+        {
+            "id": "Dinter",
+            "title": "Sophie Dinter",
+            "src": "data/images/male_EastJ.jpg ",
+            "attributes": [
+                {
+                    "label": 35,
+                    "value": ""
+                }
+            ],
+            "team": 33,
+            "location": "Walldorf",
+            "position": "Global Solutions Manager",
+            "email": "sophie.dinter@example.com",
+            "phone": "+000 423 230 000"
+        },
+        {
+            "id": "Ninsei",
+            "title": "Yamasaki Ninsei",
+            "src": "data/images/male_EastJ.jpg ",
+            "attributes": [
+                {
+                    "label": 9,
+                    "value": ""
+                }
+            ],
+            "supervisor": "Dinter",
+            "team": 9,
+            "location": "Walldorf",
+            "position": "Lead Markets Manager",
+            "email": "yamasaki.ninsei@example.com",
+            "phone": "+000 423 230 002"
+        },
+        {
+            "id": "Mills",
+            "title": "Henry Mills",
+            "src": "data/images/male_EastJ.jpg ",
+            "attributes": [
+                {
+                    "label": 4,
+                    "value": ""
+                }
+            ],
+            "supervisor": "Ninsei",
+            "team": 4,
+            "location": "Praha",
+            "position": "Sales Manager",
+            "email": "henry.mills@example.com",
+            "phone": "+000 423 232 003"
+        },
+        {
+            "id": "Polak",
+            "title": "Adam Polak",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mills",
+            "location": "Praha",
+            "position": "Marketing Specialist",
+            "email": "adam.polak@example.com",
+            "phone": "+000 423 232 004"
+        },
+        {
+            "id": "Sykorova",
+            "title": "Vlasta Sykorova",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mills",
+            "location": "Praha",
+            "position": "Human Assurance Officer",
+            "email": "vlasta.sykorova@example.com",
+            "phone": "+000 423 232 005"
+        },
+        {
+            "id": "Pavlikova",
+            "title": "Nela Pavlikova",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mills",
+            "location": "Praha",
+            "position": "Marketing Specialist",
+            "email": "nela.pavlikova@example.com",
+            "phone": "+000 423 232 006"
+        },
+        {
+            "id": "Musil",
+            "title": "Karel Musil",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mills",
+            "location": "Praha",
+            "position": "Communications Agent",
+            "email": "karel.musil@example.com",
+            "phone": "+000 423 232 007"
+        },
+        {
+            "id": "Rose",
+            "title": "Sophie Rose",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Ninsei",
+            "location": "Brno",
+            "position": "Marketing Planner",
+            "email": "sophie.rose@example.com",
+            "phone": "+000 423 235 008"
+        },
+        {
+            "id": "Binder",
+            "title": "Jasmin Binder",
+            "src": "data/images/male_EastJ.jpg ",
+            "attributes": [
+                {
+                    "label": 2,
+                    "value": ""
+                }
+            ],
+            
+            "supervisor": "Ninsei",
+            "team": 2,
+            "location": "Walldorf",
+            "position": "Sales Manager",
+            "email": "jasmin.binder@example.com",
+            "phone": "+000 423 230 009"
+        },
+        {
+            "id": "Doskocil",
+            "title": "Jiri Doskocil",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Binder",
+            "location": "Walldorf",
+            "position": "Vendor",
+            "email": "jiri.doskocil@example.com",
+            "phone": "+000 423 230 010"
+        },
+        {
+            "id": "Buttmann",
+            "title": "Rebecca Buttmann",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Binder",
+            "location": "Walldorf",
+            "position": "Vendor",
+            "email": "rebecca.buttmann@example.com",
+            "phone": "+000 423 230 011"
+        },
+        {
+            "id": "Ortmann",
+            "title": "Leo Ortmann",
+            "src": "data/images/male_EastJ.jpg ",
+            "attributes": [
+                {
+                    "label": 24,
+                    "value": ""
+                }
+            ],
+            "supervisor": "Dinter",
+            "team": 24,
+            "location": "Brno",
+            "position": "Development Supervisor",
+            "email": "leo.ortmann@example.com",
+            "phone": "+000 423 235 012"
+        },
+        {
+            "id": "Mann",
+            "title": "Thomas Mann",
+            "src": "data/images/male_EastJ.jpg ",
+            "attributes": [
+                {
+                    "label": 4,
+                    "value": ""
+                }
+            ],
+            "supervisor": "House",
+            "team": 4,
+            "location": "Brno",
+            "position": "Development Manager",
+            "email": "thomas.mann@example.com",
+            "phone": "+000 423 235 013"
+        },
+        {
+            "id": "Toman",
+            "title": "Martin Toman",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mann",
+            "location": "Brno",
+            "position": "Data Engineer",
+            "email": "martin.toman@example.com",
+            "phone": "+000 423 235 014"
+        },
+        {
+            "id": "Lee",
+            "title": "James Lee",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mann",
+            "location": "Brno",
+            "position": "Developer Associate",
+            "email": "james.lee@example.com",
+            "phone": "+000 423 235 015"
+        },
+        {
+            "id": "York",
+            "title": "Michal York",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mann",
+            "location": "Brno",
+            "position": "Implementation Specialist",
+            "email": "michal.york@example.com",
+            "phone": "+000 423 235 016"
+        },
+        {
+            "id": "Lancaster",
+            "title": "Doris Lancaster",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Mann",
+            "location": "Brno",
+            "position": "Creative Developer",
+            "email": "doris.lancaster@example.com",
+            "phone": "+000 423 235 017"
+        },
+        {
+            "id": "Traube",
+            "title": "Arnold Traube",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Ortmann",
+            "location": "Walldorf",
+            "position": "Development Consultant",
+            "email": "arnold.traube@example.com",
+            "phone": "+000 423 230 018"
+        },
+        {
+            "id": "Burke",
+            "title": "Bobby Burke",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Ortmann",
+            "attributes": [
+                {
+                    "label": 5,
+                    "value": ""
+                }
+            ],
+            "team": 5,
+            "location": "Walldorf",
+            "position": "Lead Development Manager",
+            "email": "bobby.burke@example.com",
+            "phone": "+000 423 230 019"
+        },
+        {
+            "id": "Benton",
+            "title": "Sean Benton",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Burke",
+            "location": "Walldorf",
+            "position": "Security Administrator",
+            "email": "sean.benton@example.com",
+            "phone": "+000 423 230 020"
+        },
+        {
+            "id": "Barnes",
+            "title": "Daisy Barnes",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Burke",
+            "location": "Walldorf",
+            "position": "Security Administrator",
+            "email": "daisy.barnes@example.com",
+            "phone": "+000 423 230 021"
+        },
+        {
+            "id": "Seidl",
+            "title": "Philip Seidl",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Burke",
+            "location": "Walldorf",
+            "position": "Data Analyst",
+            "email": "philip.seidl@example.com",
+            "phone": "+000 423 230 022"
+        },
+        {
+            "id": "Krenkel",
+            "title": "Albert Krenkel",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Burke",
+            "location": "Walldorf",
+            "position": "Data Analyst",
+            "email": "albert.krenkel@example.com",
+            "phone": "+000 423 230 023"
+        },
+        {
+            "id": "Kurumi",
+            "title": "Jo Kurumi",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Burke",
+            "location": "Walldorf",
+            "position": "Optimization Technician",
+            "email": "jo.kurumi@example.com",
+            "phone": "+000 423 230 024"
+        },
+        {
+            "id": "House",
+            "title": "Ondrej House",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Ortmann",
+            "attributes": [
+                {
+                    "label": 16,
+                    "value": ""
+                }
+            ],
+            "team": 16,
+            "location": "Brno",
+            "position": "Lead Development Manager",
+            "email": "ondrej.house@example.com",
+            "phone": "+000 423 235 025"
+        },
+        {
+            "id": "Mrazkova",
+            "title": "Kveta Mrazkova",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "House",
+            "location": "Brno",
+            "position": "Customer Specialist",
+            "email": "kveta.mrazkova@example.com",
+            "phone": "+000 423 235 026"
+        },
+        {
+            "id": "Baten",
+            "title": "Horst Baten",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "House",
+            "location": "Brno",
+            "position": "Security Engineer",
+            "email": "horst.baten@example.com",
+            "phone": "+000 423 235 027"
+        },
+        {
+            "id": "Zeleny",
+            "title": "Jakub Zeleny",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "House",
+            "attributes": [
+                {
+                    "label": 3,
+                    "value": ""
+                }
+            ],
+            "team": 3,
+            "location": "Brno",
+            "position": "Senior Designer",
+            "email": "jakub.zeleny@example.com",
+            "phone": "+000 423 235 028"
+        },
+        {
+            "id": "Asako",
+            "title": "Oye Asako",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "House",
+            "attributes": [
+                {
+                    "label": 1,
+                    "value": ""
+                }
+            ],
+            "team": 1,
+            "location": "Brno",
+            "position": "Senior Designer",
+            "email": "oye.asako@example.com",
+            "phone": "+000 423 235 029"
+        },
+        {
+            "id": "Hozumi",
+            "title": "Shirai Hozumi",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Asako",
+            "location": "Brno",
+            "position": "Junior Designer",
+            "email": "shirai.hozumi@example.com",
+            "phone": "+000 423 235 030"
+        },
+        {
+            "id": "Borg",
+            "title": "Vaclav Borg",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "House",
+            "attributes": [
+                {
+                    "label": 2,
+                    "value": ""
+                }
+            ],
+            "team": 2,
+            "location": "Brno",
+            "position": "Research Manager",
+            "email": "vaclav.borg@example.com",
+            "phone": "+000 423 235 031"
+        },
+        {
+            "id": "Vaclavikova",
+            "title": "Katerina Vaclavikova",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Borg",
+            "location": "Brno",
+            "position": "Research Senior Developer",
+            "email": "katerina.vaclavikova@example.com",
+            "phone": "+000 423 235 032"
+        },
+        {
+            "id": "Backora",
+            "title": "Petr Backora",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Borg",
+            "location": "Brno",
+            "position": "Research Developer",
+            "email": "petr.beckora@example.com",
+            "phone": "+000 423 235 033"
+        },
+        {
+            "id": "Havlicek",
+            "title": "Pavel Havlicek",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Zeleny",
+            "location": "Brno",
+            "position": "Junior Designer",
+            "email": "pavel.havlicek@example.com",
+            "phone": "+000 423 235 034"
+        },
+        {
+            "id": "Vodickova",
+            "title": "Marie Vodickova",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Zeleny",
+            "location": "Brno",
+            "position": "Junior Designer",
+            "email": "marie.vodickova@example.com",
+            "phone": "+000 423 235 035"
+        },
+        {
+            "id": "Kovac",
+            "title": "Tomas Kovac",
+            "src": "data/images/male_EastJ.jpg ",
+            "supervisor": "Zeleny",
+            "location": "Brno",
+            "position": "Consultant",
+            "email": "tomas.kovac@example.com",
+            "phone": "+000 423 235 036"
+        }
+    ],
+    "lines": [
+        {
+            "from": "Mann",
+            "to": "Toman"
+        },
+        {
+            "from": "Mann",
+            "to": "Lee"
+        },
+        {
+            "from": "Mann",
+            "to": "York"
+        },
+        {
+            "from": "Mann",
+            "to": "Lancaster"
+        },
+        {
+            "from": "House",
+            "to": "Borg"
+        },
+        {
+            "from": "House",
+            "to": "Zeleny"
+        },
+        {
+            "from": "House",
+            "to": "Asako"
+        },
+        {
+            "from": "House",
+            "to": "Mann"
+        },
+        {
+            "from": "House",
+            "to": "Mrazkova"
+        },
+        {
+            "from": "House",
+            "to": "Baten"
+        },
+        {
+            "from": "Binder",
+            "to": "Buttmann"
+        },
+        {
+            "from": "Binder",
+            "to": "Doskocil"
+        },
+        {
+            "from": "Borg",
+            "to": "Vaclavikova"
+        },
+        {
+            "from": "Borg",
+            "to": "Backora"
+        },
+        {
+            "from": "Asako",
+            "to": "Hozumi"
+        },
+        {
+            "from": "Ortmann",
+            "to": "Burke"
+        },
+        {
+            "from": "Ortmann",
+            "to": "Traube"
+        },
+        {
+            "from": "Burke",
+            "to": "Krenkel"
+        },
+        {
+            "from": "Burke",
+            "to": "Benton"
+        },
+        {
+            "from": "Burke",
+            "to": "Barnes"
+        },
+        {
+            "from": "Burke",
+            "to": "Kurumi"
+        },
+        {
+            "from": "Burke",
+            "to": "Seidl"
+        },
+        {
+            "from": "Ortmann",
+            "to": "House"
+        },
+        {
+            "from": "Dinter",
+            "to": "Ortmann"
+        },
+        {
+            "from": "Dinter",
+            "to": "Ninsei"
+        },
+        {
+            "from": "Ninsei",
+            "to": "Binder"
+        },
+        {
+            "from": "Ninsei",
+            "to": "Rose"
+        },
+        {
+            "from": "Ninsei",
+            "to": "Mills"
+        },
+        {
+            "from": "Mills",
+            "to": "Polak"
+        },
+        {
+            "from": "Mills",
+            "to": "Musil"
+        },
+        {
+            "from": "Mills",
+            "to": "Sykorova"
+        },
+        {
+            "from": "Mills",
+            "to": "Pavlikova"
+        },
+        {
+            "from": "Zeleny",
+            "to": "Havlicek"
+        },
+        {
+            "from": "Zeleny",
+            "to": "Vodickova"
+        },
+        {
+            "from": "Zeleny",
+            "to": "Kovac"
+        }
+    ]
+}

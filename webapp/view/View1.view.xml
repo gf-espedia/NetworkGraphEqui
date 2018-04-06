@@ -1,0 +1,55 @@
+<mvc:View controllerName="com.gv.nge.NetworkGraphEqui.controller.View1" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:vk="sap.ui.vk"
+	displayBlock="true" xmlns="sap.m" xmlns:ng="sap.suite.ui.commons.networkgraph">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{i18n>title}">
+				<content>
+					<l:ResponsiveSplitter defaultPane="default">
+						<l:PaneContainer>
+							<l:SplitPane requiredParentWidth="400" id="default">
+								<Panel headerText="Component Tree" height="100%">
+									<ng:Graph orientation="TopBottom" id="graph" layout="Layered" searchSuggest="suggest" search="search" nodes="{/nodes}" lines="{/lines}">
+										<ng:layoutAlgorithm>
+											<layout:LayeredLayout mergeEdges="true" nodePlacement="Simple" nodeSpacing="40"/>
+										</ng:layoutAlgorithm>
+										<ng:nodes>
+											<ng:Node icon="sap-icon://action-settings" key="{id}" description="{title}" width="90" collapsed="{collapsed}" attributes="{attributes}"
+												showActionLinksButton="false" showDetailButton="false" descriptionLineSize="0" shape="Box">
+												<ng:customData>
+													<core:CustomData key="description" value="{description}"/>
+													<core:CustomData key="production-plant" value="{production-plant}"/>
+													<core:CustomData key="purchase-price" value="{purchase-price}"/>
+													<core:CustomData key="location" value="{location}"/>
+													<core:CustomData key="status" value="{status}"/>
+													<core:CustomData key="temperature" value="{temperature}"/>
+													<core:CustomData key="estimated-tol" value="{estimated-tol}"/>
+													<core:CustomData key="is-parent" value="{is-parent}"/>
+													<core:CustomData key="parent" value="{parent}"/>
+												</ng:customData>
+												<ng:attributes>
+													<ng:ElementAttribute label="{label}" value="{value}"/>
+												</ng:attributes>
+												<ng:image>
+													<ng:NodeImage src="{src}" width="80" height="100"/>
+												</ng:image>
+											</ng:Node>
+										</ng:nodes>
+										<ng:lines>
+											<ng:Line from="{from}" to="{to}" arrowOrientation="None" press="linePress"/>
+										</ng:lines>
+									</ng:Graph>
+								</Panel>
+							</l:SplitPane>
+							<l:SplitPane requiredParentWidth="800">
+								<Panel headerText="3D Viewer" height="100%">
+								<vk:Viewport id="viewport" width="100%" height="100%"/>
+								</Panel>
+							</l:SplitPane>
+						</l:PaneContainer>
+					</l:ResponsiveSplitter>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

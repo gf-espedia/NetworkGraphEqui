@@ -1,0 +1,126 @@
+{
+    "nodes": [
+        {
+            "id": "9878787",
+            "title": "Industrial Packer 78",
+            "description": "Industrial packager with specialized arm to fill insulin syringes",
+            "src": "data/images/9878787.jpg",
+            "attributes": [
+                {
+                    "label": 35,
+                    "value": ""
+                }
+            ],
+            "is-parent": true,
+            "production-plant": "Big Machines Inc., Berlin",
+            "purchase-price": "100.000,00$",
+            "location": "Milan, Italy",
+            "status": "Active",
+            "temperature": "19°",
+            "vibration-level": "stable",
+            "estimated-tol": "78"
+        },
+        {
+            "id": "9767676",
+            "title": "Mechanical Arm Model 192.3A",
+            "description": "Specialized arm with coaxial rotation",
+            "src": "data/images/9767676.jpg",
+            "attributes": [
+                {
+                    "label": 31,
+                    "value": ""
+                }
+            ],
+            "is-parent": true,
+            "parent": "9878787",
+            "production-plant": "Slightly Smaller Machines Inc., Berlin",
+            "purchase-price": "31.840,00$",
+            "location": "Milan, Italy",
+            "status": "Active",
+            "temperature": "21°",
+            "vibration-level": "average",
+            "estimated-tol": "198"
+        },
+        {
+            "id": "8434343",
+            "title": "Support Base 6CF8",
+            "description": "Nichel/Chromium support base for the mechanical arm",
+            "src": "data/images/8434343.jpg",
+            "attributes": [
+                {
+                    "label": 31,
+                    "value": ""
+                }
+            ],
+            "is-parent": false,
+            "parent": "9878787",
+            "production-plant": "SolidB Inc., Lisbon",
+            "purchase-price": "5.230,00$",
+            "location": "Milan, Italy",
+            "status": "-",
+            "temperature": "16°",
+            "vibration-level": "moderate-high",
+            "estimated-tol": "78"
+        },
+        {
+            "id": "7565656",
+            "title": "Arm Attachment S+",
+            "description": "Arm attachment with 72 nozzles",
+            "src": "data/images/7565656.jpg",
+            "attributes": [
+                {
+                    "label": 21,
+                    "value": ""
+                }
+            ],
+            "is-parent": true,
+            "parent": "9767676",
+            "production-plant": "Slightly Smaller Machines Inc., Berlin",
+            "purchase-price": "22.134,00$",
+            "location": "Milan, Italy",
+            "status": "Active",
+            "temperature": "18°",
+            "vibration-level": "average",
+            "estimated-tol": "125"
+        },
+        {
+            "id": "4121212",
+            "title": "Syringe Holder 7K",
+            "description": "Syringe holder with support for elliptical syringes",
+            "src": "data/images/4121212.jpg",
+            "attributes": [
+                {
+                    "label": 14,
+                    "value": ""
+                }
+            ],
+            "is-parent": false,
+            "parent": "7565656",
+            "production-plant": "Medicorp, Rome",
+            "purchase-price": "87,00$",
+            "location": "Milan, Italy",
+            "status": "/",
+            "temperature": "20°",
+            "vibration-level": "high",
+            "estimated-tol": "21"
+        }
+    ],
+    "lines": [
+        {
+            "from": "9878787",
+            "to": "9767676"
+        },
+        {
+            "from": "9878787",
+            "to": "8434343"
+        },
+        {
+            "from": "9767676",
+            "to": "7565656"
+        },
+        {
+            "from": "7565656",
+            "to": "4121212"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<QuickView id="quickView">
+		<QuickViewPage header="Item" icon="{/icon}" title="{/title}" description="{/itemDescription}">
+			<QuickViewGroup heading="Additional Information">
+				<QuickViewGroupElement label="Location" value="{/location}"/>
+				<QuickViewGroupElement label="Production Plant" value="{/productionPlant}"/>
+				<QuickViewGroupElement label="Purchase Price" value="{/purchasePrice}"/>
+				<QuickViewGroupElement label="Status" value="{/status}"/>
+				<QuickViewGroupElement label="Temperature" value="{/temperature}"/>
+				<QuickViewGroupElement label="Estimated hours before maintenance is necessaty" value="{/estimatedTol}"/>
+			</QuickViewGroup>
+		</QuickViewPage>
+	</QuickView>
+</core:FragmentDefinition>
