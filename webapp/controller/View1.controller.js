@@ -103,7 +103,7 @@ sap.ui.define([
 			}.bind(this));
 
 			// VIEWER CON 3 COMPONENTI SEPARATE
-			/*//viewer
+			//viewer
 			var view = this.getView();
 			var oViewport = view.byId("viewport");
 			var sceneTree = view.byId("scenetree");
@@ -136,21 +136,21 @@ sap.ui.define([
 			view.addDependent(contentConnector).addDependent(viewStateManager);
 
 			//Add resource to load to content connector
-			contentConnector.addContentResource(contentResource);*/
+			contentConnector.addContentResource(contentResource);
 			
 			
 			// COMPONENTE VIEWER UNICA
-			var viewer = this.getView().byId("viewer");
+			/*var viewer = this.getView().byId("viewer");
 			var contentResource = new sap.ui.vk.ContentResource({
 				source: "data/9582900275.vds",
 				sourceType: "vds",
 				sourceId: "abc123"
 			});
 			viewer.addContentResource(contentResource);
-			viewer.setShowSceneTree(false);
+			viewer.setShowSceneTree(false);*/
 			
 			/// SET PANEL LAYOUTS
-			var l1 = new sap.ui.layout.SplitterLayoutData({
+			/*var l1 = new sap.ui.layout.SplitterLayoutData({
 				size: "30%"
 			});
 			this.getView().byId("masterPanel").setLayoutData(l1);
@@ -163,7 +163,7 @@ sap.ui.define([
 			var h2 = new sap.ui.layout.SplitterLayoutData({
 				size: "50%"
 			});
-			this.getView().byId("viewerPanel").setLayoutData(h2);
+			this.getView().byId("viewerPanel").setLayoutData(h2);*/
 			
 			// Gestione dati masterlist
 			//var oModel = new sap.ui.model.json.JSONModel("data/masterList.json");//jQuery.sap.getModulePath("sap.ui.demo.mock", "/products.json"));
@@ -294,17 +294,17 @@ sap.ui.define([
 			if (!selected) {
 				this.selectViewerNode(key);
 			} else {
-				//var vsmId = this.getView().byId("viewport").getViewStateManager();
-				//var vsm = sap.ui.getCore().byId(vsmId);
-				var vsm = this.getView().byId("viewer").getViewStateManager();
+				var vsmId = this.getView().byId("viewport").getViewStateManager();
+				var vsm = sap.ui.getCore().byId(vsmId);
+				//var vsm = this.getView().byId("viewer").getViewStateManager();
 				vsm.enumerateSelection(this.clearSelection.bind(this));
 			}
 		},
 
 		selectViewerNode: function(key) {
-			//var vsmId = this.getView().byId("viewport").getViewStateManager();
-			//var vsm = sap.ui.getCore().byId(vsmId);
-			var vsm = this.getView().byId("viewer").getViewStateManager();
+			var vsmId = this.getView().byId("viewport").getViewStateManager();
+			var vsm = sap.ui.getCore().byId(vsmId);
+			//var vsm = this.getView().byId("viewer").getViewStateManager();
 			var nh = vsm.getNodeHierarchy();
 			vsm.enumerateSelection(this.clearSelection.bind(this));
 
@@ -328,9 +328,9 @@ sap.ui.define([
 		},
 
 		clearSelection: function(id) {
-			//var vsmId = this.getView().byId("viewport").getViewStateManager();
-			//var vsm = sap.ui.getCore().byId(vsmId);
-			var vsm = this.getView().byId("viewer").getViewStateManager();
+			var vsmId = this.getView().byId("viewport").getViewStateManager();
+			var vsm = sap.ui.getCore().byId(vsmId);
+			//var vsm = this.getView().byId("viewer").getViewStateManager();
 			vsm.setSelectionState(id, false, true);
 		},
 		
