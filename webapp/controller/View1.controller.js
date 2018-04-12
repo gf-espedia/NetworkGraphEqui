@@ -188,8 +188,7 @@ sap.ui.define([
 
 			this._mModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 			this.getView().byId("masterList").setModel(this._mModel);
-			
-			
+
 			// SplitButton
 			this.getView().byId("segButton").attachSelectionChange(this.switchSubView, this);
 		},
@@ -357,34 +356,34 @@ sap.ui.define([
 		onListItemPress: function(evt) {
 			sap.m.MessageToast.show("Pressed : " + evt.getSource().getTitle());
 		},
-		
+
 		switchSubView: function(oEvent) {
 			var key = oEvent.getSource().getSelectedKey();
-			
+
 			if (key === "v3d") {
-			var viewerHeight = new sap.ui.layout.SplitterLayoutData({
-				size: "100%",
-				resizable: false
-			});
-			this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
-			var testHeight = new sap.ui.layout.SplitterLayoutData({
-				size: "0px",
-				resizable: false
-			});
-			this.getView().byId("test").setLayoutData(testHeight);
+				var viewerHeight = new sap.ui.layout.SplitterLayoutData({
+					size: "100%",
+					resizable: false
+				});
+				this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
+				var testHeight = new sap.ui.layout.SplitterLayoutData({
+					size: "0px",
+					resizable: false
+				});
+				this.getView().byId("test").setLayoutData(testHeight);
 			} else if (key === "test") {
-			var viewerHeight = new sap.ui.layout.SplitterLayoutData({
-				size: "0px",
-				resizable: false
-			});
-			this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
-			var testHeight = new sap.ui.layout.SplitterLayoutData({
-				size: "100%",
-				resizable: false
-			});
-			this.getView().byId("test").setLayoutData(testHeight);
+				var viewerHeight = new sap.ui.layout.SplitterLayoutData({
+					size: "0px",
+					resizable: false
+				});
+				this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
+				var testHeight = new sap.ui.layout.SplitterLayoutData({
+					size: "100%",
+					resizable: false
+				});
+				this.getView().byId("test").setLayoutData(testHeight);
 			}
-				
+
 		}
 	});
 });
