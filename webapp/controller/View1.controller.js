@@ -32,7 +32,7 @@ sap.ui.define([
 				// which results in multiple unnecessary loading
 				this._graph.preventInvalidation(true);
 				this._graph.getNodes().forEach(function(oNode) {
-
+					
 					oNode.attachPress(this.onNodePress, this);
 
 					var oExpandButton, oDetailButton, oUpOneLevelButton,
@@ -46,6 +46,7 @@ sap.ui.define([
 						oNode.setShowExpandButton(false);
 					} else {
 						if (this._mExplored.indexOf(oNode.getKey()) === -1) {
+
 							// managers with team but not yet expanded
 							// we create custom expand button with dynamic loading
 							oNode.setShowExpandButton(false);
@@ -101,7 +102,8 @@ sap.ui.define([
 				this._graph.preventInvalidation(false);
 			}.bind(this));
 
-			//viewer
+			// VIEWER CON 3 COMPONENTI SEPARATE
+			/*//viewer
 			var view = this.getView();
 			var oViewport = view.byId("viewport");
 			var sceneTree = view.byId("scenetree");
@@ -134,17 +136,42 @@ sap.ui.define([
 			view.addDependent(contentConnector).addDependent(viewStateManager);
 
 			//Add resource to load to content connector
-			contentConnector.addContentResource(contentResource);
-
+			contentConnector.addContentResource(contentResource);*/
+			
+			
+			// COMPONENTE VIEWER UNICA
+			var viewer = this.getView().byId("viewer");
+			var contentResource = new sap.ui.vk.ContentResource({
+				source: "data/9582900275.vds",
+				sourceType: "vds",
+				sourceId: "abc123"
+			});
+			viewer.addContentResource(contentResource);
+			viewer.setShowSceneTree(false);
+			
 			/// SET PANEL LAYOUTS
 			var l1 = new sap.ui.layout.SplitterLayoutData({
-				size: "40%"
+				size: "30%"
 			});
-			this.getView().byId("networkPanel").setLayoutData(l1);
-			var l2 = new sap.ui.layout.SplitterLayoutData({
-				size: "60%"
+			this.getView().byId("masterPanel").setLayoutData(l1);
+			
+			
+			var h1 = new sap.ui.layout.SplitterLayoutData({
+				size: "50%"
 			});
-			this.getView().byId("viewerPanel").setLayoutData(l2);
+			this.getView().byId("networkPanel").setLayoutData(h1);
+			var h2 = new sap.ui.layout.SplitterLayoutData({
+				size: "50%"
+			});
+			this.getView().byId("viewerPanel").setLayoutData(h2);
+			
+			// Gestione dati masterlist
+			//var oModel = new sap.ui.model.json.JSONModel("data/masterList.json");//jQuery.sap.getModulePath("sap.ui.demo.mock", "/products.json"));
+			//this.getView().setModel(oModel);
+			this._mModel = new sap.ui.model.json.JSONModel("data/masterList.json");
+			
+			this._mModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
+			this.getView().byId("masterList").setModel(this._mModel);
 		},
 
 		search: function(oEvent) {
@@ -267,15 +294,17 @@ sap.ui.define([
 			if (!selected) {
 				this.selectViewerNode(key);
 			} else {
-				var vsmId = this.getView().byId("viewport").getViewStateManager();
-				var vsm = sap.ui.getCore().byId(vsmId);
+				//var vsmId = this.getView().byId("viewport").getViewStateManager();
+				//var vsm = sap.ui.getCore().byId(vsmId);
+				var vsm = this.getView().byId("viewer").getViewStateManager();
 				vsm.enumerateSelection(this.clearSelection.bind(this));
 			}
 		},
 
 		selectViewerNode: function(key) {
-			var vsmId = this.getView().byId("viewport").getViewStateManager();
-			var vsm = sap.ui.getCore().byId(vsmId);
+			//var vsmId = this.getView().byId("viewport").getViewStateManager();
+			//var vsm = sap.ui.getCore().byId(vsmId);
+			var vsm = this.getView().byId("viewer").getViewStateManager();
 			var nh = vsm.getNodeHierarchy();
 			vsm.enumerateSelection(this.clearSelection.bind(this));
 
@@ -299,9 +328,14 @@ sap.ui.define([
 		},
 
 		clearSelection: function(id) {
-			var vsmId = this.getView().byId("viewport").getViewStateManager();
-			var vsm = sap.ui.getCore().byId(vsmId);
+			//var vsmId = this.getView().byId("viewport").getViewStateManager();
+			//var vsm = sap.ui.getCore().byId(vsmId);
+			var vsm = this.getView().byId("viewer").getViewStateManager();
 			vsm.setSelectionState(id, false, true);
+		},
+		
+		onListItemPress: function(evt) {
+			sap.m.MessageToast.show("Pressed : " + evt.getSource().getTitle());
 		}
 	});
 });
