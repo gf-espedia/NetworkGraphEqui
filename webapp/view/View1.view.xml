@@ -5,9 +5,9 @@
 		<pages>
 			<Page title="{i18n>title}">
 				<content>
-					<l:ResponsiveSplitter defaultPane="default">
+					<l:ResponsiveSplitter defaultPane="networkPanel">
 						<l:PaneContainer>
-							<l:SplitPane requiredParentWidth="400" id="default">
+							<l:SplitPane requiredParentWidth="400" id="networkPanel">
 								<Panel headerText="Component Tree" height="100%">
 									<ng:Graph orientation="TopBottom" id="graph" layout="Layered" searchSuggest="suggest" search="search" nodes="{/nodes}" lines="{/lines}">
 										<ng:layoutAlgorithm>
@@ -41,9 +41,13 @@
 									</ng:Graph>
 								</Panel>
 							</l:SplitPane>
-							<l:SplitPane requiredParentWidth="800">
+							<l:SplitPane requiredParentWidth="800"  id="viewerPanel">
 								<Panel headerText="3D Viewer" height="100%">
-								<vk:Viewport id="viewport" width="100%" height="100%"/>
+									<VBox>
+										<vk:StepNavigation id="stepnavigation" height="20%"/>
+										<vk:Viewport id="viewport" width="100%" height="300px"/>
+										<vk:SceneTree id="scenetree" width="100%" height="20%"/>
+									</VBox>
 								</Panel>
 							</l:SplitPane>
 						</l:PaneContainer>

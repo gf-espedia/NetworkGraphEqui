@@ -8,7 +8,8 @@ sap.ui.define([
 	"sap/suite/ui/commons/library",
 	"sap/ui/vk/ContentResource",
 	"sap/ui/vk/ContentConnector",
-	"sap/ui/vk/dvl/ViewStateManager"
+	"sap/ui/vk/dvl/ViewStateManager",
+	"sap/m/MessageToast"
 ], function(Controller) {
 	"use strict";
 
@@ -31,6 +32,9 @@ sap.ui.define([
 				// which results in multiple unnecessary loading
 				this._graph.preventInvalidation(true);
 				this._graph.getNodes().forEach(function(oNode) {
+
+					oNode.attachPress(this.onNodePress, this);
+
 					var oExpandButton, oDetailButton, oUpOneLevelButton,
 						sIsParent = this._getCustomDataValue(oNode, "is-parent"),
 						sParent;
@@ -100,6 +104,8 @@ sap.ui.define([
 			//viewer
 			var view = this.getView();
 			var oViewport = view.byId("viewport");
+			var sceneTree = view.byId("scenetree");
+			var stepNavigation = view.byId("stepnavigation");
 
 			var contentResource = new sap.ui.vk.ContentResource({
 				source: "data/9582900275.vds",
@@ -118,10 +124,27 @@ sap.ui.define([
 			oViewport.setContentConnector(contentConnector);
 			oViewport.setViewStateManager(viewStateManager);
 
+			// Set contentconnector and viewstatemanager for scene tree
+			sceneTree.setContentConnector(contentConnector);
+			sceneTree.setViewStateManager(viewStateManager);
+
+			//set step navigation content connector
+			stepNavigation.setContentConnector(contentConnector);
+
 			view.addDependent(contentConnector).addDependent(viewStateManager);
 
 			//Add resource to load to content connector
 			contentConnector.addContentResource(contentResource);
+
+			/// SET PANEL LAYOUTS
+			var l1 = new sap.ui.layout.SplitterLayoutData({
+				size: "40%"
+			});
+			this.getView().byId("networkPanel").setLayoutData(l1);
+			var l2 = new sap.ui.layout.SplitterLayoutData({
+				size: "60%"
+			});
+			this.getView().byId("viewerPanel").setLayoutData(l2);
 		},
 
 		search: function(oEvent) {
@@ -166,38 +189,38 @@ sap.ui.define([
 
 		_setFilter: function() {
 			var aNodesCond = [],
-						aLinesCond = [];
-						var fnAddBossCondition = function (sBoss) {
-							aNodesCond.push(new sap.ui.model.Filter({
-								path: 'id',
-								operator: sap.ui.model.FilterOperator.EQ,
-								value1: sBoss
-							}));
-							aNodesCond.push(new sap.ui.model.Filter({
-								path: 'parent',
-								operator: sap.ui.model.FilterOperator.EQ,
-								value1: sBoss
-							}));
-						};
-						var fnAddLineCondition = function (sLine) {
-							aLinesCond.push(new sap.ui.model.Filter({
-								path: "from",
-								operator: sap.ui.model.FilterOperator.EQ,
-								value1: sLine
-							}));
-						};
-						this._mExplored.forEach(function (oItem) {
-							fnAddBossCondition(oItem);
-							fnAddLineCondition(oItem);
-						});
-						this._graph.getBinding("nodes").filter(new sap.ui.model.Filter({
-							filters: aNodesCond,
-							and: false
-						}));
-						this._graph.getBinding("lines").filter(new sap.ui.model.Filter({
-							filters: aLinesCond,
-							and: false
-						}));
+				aLinesCond = [];
+			var fnAddBossCondition = function(sBoss) {
+				aNodesCond.push(new sap.ui.model.Filter({
+					path: 'id',
+					operator: sap.ui.model.FilterOperator.EQ,
+					value1: sBoss
+				}));
+				aNodesCond.push(new sap.ui.model.Filter({
+					path: 'parent',
+					operator: sap.ui.model.FilterOperator.EQ,
+					value1: sBoss
+				}));
+			};
+			var fnAddLineCondition = function(sLine) {
+				aLinesCond.push(new sap.ui.model.Filter({
+					path: "from",
+					operator: sap.ui.model.FilterOperator.EQ,
+					value1: sLine
+				}));
+			};
+			this._mExplored.forEach(function(oItem) {
+				fnAddBossCondition(oItem);
+				fnAddLineCondition(oItem);
+			});
+			this._graph.getBinding("nodes").filter(new sap.ui.model.Filter({
+				filters: aNodesCond,
+				and: false
+			}));
+			this._graph.getBinding("lines").filter(new sap.ui.model.Filter({
+				filters: aLinesCond,
+				and: false
+			}));
 		},
 
 		_loadMore: function(sName) {
@@ -236,6 +259,49 @@ sap.ui.define([
 
 		linePress: function(oEvent) {
 			oEvent.bPreventDefault = true;
+		},
+
+		onNodePress: function(oEvent) {
+			var key = oEvent.getSource().getKey();
+			var selected = oEvent.getSource().getSelected();
+			if (!selected) {
+				this.selectViewerNode(key);
+			} else {
+				var vsmId = this.getView().byId("viewport").getViewStateManager();
+				var vsm = sap.ui.getCore().byId(vsmId);
+				vsm.enumerateSelection(this.clearSelection.bind(this));
+			}
+		},
+
+		selectViewerNode: function(key) {
+			var vsmId = this.getView().byId("viewport").getViewStateManager();
+			var vsm = sap.ui.getCore().byId(vsmId);
+			var nh = vsm.getNodeHierarchy();
+			vsm.enumerateSelection(this.clearSelection.bind(this));
+
+			// Solo per sviluppo
+			var mockMapping = {
+				"9878787": "9582900275_CORPO_VALVOLA_ASPIRAZIONE",
+				"9767676": "9582900275_CILINDRO_VALVOLA_ASPIRAZIONE",
+				"8434343": "9582900275_ASTA_VALVOLA_ASPIRAZIONE",
+				"7565656": "9310110782",
+				"4121212": "VITI"
+			};
+			var name = mockMapping[key];
+
+			var query = {
+				value: name,
+				caseSensitive: false,
+				predicate: "contains"
+			};
+			var node = nh.findNodesByName(query);
+			vsm.setSelectionState(node, true, true);
+		},
+
+		clearSelection: function(id) {
+			var vsmId = this.getView().byId("viewport").getViewStateManager();
+			var vsm = sap.ui.getCore().byId(vsmId);
+			vsm.setSelectionState(id, false, true);
 		}
 	});
 });

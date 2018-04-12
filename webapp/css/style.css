@@ -1,1 +1,25 @@
 /* Enter your custom styles here */
+
+.sapMNav.sapMSplitContainerMaster{
+  width: 20%;
+}
+
+/*.sapMTB {
+	overflow: visible;
+}
+
+.sapMTBNewFlex {
+	flex-wrap: wrap;
+}
+
+.sapVizKitStepNavigation {
+	margin: 10px 0px 20px 0px;
+}*/
+
+@media (min-width: 1280px) {
+html.sap-desktop .sapMShellAppWidthLimited .sapMShellCentralBox {
+    width: 100%!important;
+    left: 50%;
+    margin-left: -50%;
+    }
+}
