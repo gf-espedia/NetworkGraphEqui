@@ -32,7 +32,7 @@ sap.ui.define([
 				// which results in multiple unnecessary loading
 				this._graph.preventInvalidation(true);
 				this._graph.getNodes().forEach(function(oNode) {
-					
+
 					oNode.attachPress(this.onNodePress, this);
 
 					var oExpandButton, oDetailButton, oUpOneLevelButton,
@@ -137,8 +137,7 @@ sap.ui.define([
 
 			//Add resource to load to content connector
 			contentConnector.addContentResource(contentResource);
-			
-			
+
 			// COMPONENTE VIEWER UNICA
 			/*var viewer = this.getView().byId("viewer");
 			var contentResource = new sap.ui.vk.ContentResource({
@@ -148,7 +147,7 @@ sap.ui.define([
 			});
 			viewer.addContentResource(contentResource);
 			viewer.setShowSceneTree(false);*/
-			
+
 			/// SET PANEL LAYOUTS
 			/*var l1 = new sap.ui.layout.SplitterLayoutData({
 				size: "30%"
@@ -164,14 +163,35 @@ sap.ui.define([
 				size: "50%"
 			});
 			this.getView().byId("viewerPanel").setLayoutData(h2);*/
-			
+
+			var toolbarHeight = new sap.ui.layout.SplitterLayoutData({
+				size: "100px",
+				resizable: false
+			});
+			this.getView().byId("toolbarPanel").setLayoutData(toolbarHeight);
+
+			var viewerHeight = new sap.ui.layout.SplitterLayoutData({
+				resizable: false
+			});
+			this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
+
+			var testHeight = new sap.ui.layout.SplitterLayoutData({
+				size: "0px",
+				resizable: false
+			});
+			this.getView().byId("test").setLayoutData(testHeight);
+
 			// Gestione dati masterlist
 			//var oModel = new sap.ui.model.json.JSONModel("data/masterList.json");//jQuery.sap.getModulePath("sap.ui.demo.mock", "/products.json"));
 			//this.getView().setModel(oModel);
 			this._mModel = new sap.ui.model.json.JSONModel("data/masterList.json");
-			
+
 			this._mModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 			this.getView().byId("masterList").setModel(this._mModel);
+			
+			
+			// SplitButton
+			this.getView().byId("segButton").attachSelectionChange(this.switchSubView, this);
 		},
 
 		search: function(oEvent) {
@@ -333,9 +353,38 @@ sap.ui.define([
 			//var vsm = this.getView().byId("viewer").getViewStateManager();
 			vsm.setSelectionState(id, false, true);
 		},
-		
+
 		onListItemPress: function(evt) {
 			sap.m.MessageToast.show("Pressed : " + evt.getSource().getTitle());
+		},
+		
+		switchSubView: function(oEvent) {
+			var key = oEvent.getSource().getSelectedKey();
+			
+			if (key === "v3d") {
+			var viewerHeight = new sap.ui.layout.SplitterLayoutData({
+				size: "100%",
+				resizable: false
+			});
+			this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
+			var testHeight = new sap.ui.layout.SplitterLayoutData({
+				size: "0px",
+				resizable: false
+			});
+			this.getView().byId("test").setLayoutData(testHeight);
+			} else if (key === "test") {
+			var viewerHeight = new sap.ui.layout.SplitterLayoutData({
+				size: "0px",
+				resizable: false
+			});
+			this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
+			var testHeight = new sap.ui.layout.SplitterLayoutData({
+				size: "100%",
+				resizable: false
+			});
+			this.getView().byId("test").setLayoutData(testHeight);
+			}
+				
 		}
 	});
 });
