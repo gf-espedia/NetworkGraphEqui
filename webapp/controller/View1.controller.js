@@ -546,7 +546,39 @@ sap.ui.define([
 				var oPanel2 = this.getView().byId("viewerPanel");
 				oPanel2.setVisible(true);
 			}
-		}
+		},
+
+			handleAppointmentSelect: function (oEvent) {
+				var oAppointment = oEvent.getParameter("appointment");
+				if (oAppointment) {
+					sap.m.MessageBox.show("Appointment selected: " + oAppointment.getTitle());
+				} else {
+					var aAppointments = oEvent.getParameter("appointments");
+					var sValue = aAppointments.length + " Appointments selected";
+					sap.m.MessageBox.show(sValue);
+				}
+			},
+
+			handleIntervalSelect: function (oEvent) {
+				var oStartDate = oEvent.getParameter("startDate");
+				var oEndDate = oEvent.getParameter("endDate");
+				var oModel = this.getView().getModel();
+				var oData = oModel.getData();
+				var oAppointment = {
+					start: oStartDate,
+					end: oEndDate,
+					title: "new appointment",
+					type: "Type09"
+				};
+
+				oData.people[0].appointments.push(oAppointment);
+				oModel.setData(oData);
+			},
+
+			toggleDayNamesLine: function (oEvent) {
+				var oPC = this.getView().byId("calendar");
+				oPC.setShowDayNamesLine(!oPC.getShowDayNamesLine());
+			}
 
 	});
 });

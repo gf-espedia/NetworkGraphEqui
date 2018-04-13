@@ -56,8 +56,8 @@
 												<ToolbarSpacer/>
 												<SegmentedButton selectedKey="v3d" id="segButton">
 													<items>
-														<SegmentedButtonItem text="Viewer" key="v3d"/>
-														<SegmentedButtonItem text="Calendar" key="calend"/>
+														<SegmentedButtonItem text="Viewer" key="v3d" width="200px"/>
+														<SegmentedButtonItem text="Calendar" key="calend" width="200px"/>
 													</items>
 												</SegmentedButton>
 												<ToolbarSpacer/>
