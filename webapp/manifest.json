@@ -31,6 +31,7 @@
 			"phone": true
 		},
 		"supportedThemes": [
+			"sap_belize_plus",
 			"sap_hcb",
 			"sap_belize"
 

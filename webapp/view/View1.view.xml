@@ -8,8 +8,8 @@
 					<l:ResponsiveSplitter defaultPane="networkPanel">
 						<l:PaneContainer>
 							<l:SplitPane requiredParentWidth="800" id="masterPanel">
-								<Panel headerText="Master List" height="100%">
-									<List id="masterList" headerText="Products" items="{ path: '/ProductCollection' }">
+								<Panel headerText="Equipment" height="100%">
+									<List id="masterList" items="{ path: '/ProductCollection' }">
 										<StandardListItem title="{Name}" counter="{Quantity}"/>
 									</List>
 								</Panel>
@@ -48,7 +48,7 @@
 									</ng:Graph>
 								</Panel>
 							</l:SplitPane>
-							<l:SplitPane requiredParentWidth="800" id="toolbarPanel">
+							<l:SplitPane requiredParentWidth="800" id="multiPanel">
 								<VBox>
 									<Panel height="auto">
 										<VBox>
@@ -66,6 +66,13 @@
 									</Panel>
 									<Panel height="90%" id="viewerPanel">
 										<VBox>
+											<Toolbar id="viewerToolbar">
+												<html:h4 id="vToolbarTitle">9582900275.vds</html:h4>
+												<ToolbarSpacer/>
+												<ToggleButton icon="sap-icon://tree" press="onTreeToggle"/>
+												<ToggleButton icon="sap-icon://step" press="onStepToggle"/>
+												<ToggleButton icon="sap-icon://full-screen" press="onFullScreen"/>
+											</Toolbar>
 											<vk:StepNavigation id="stepnavigation" height="20%"/>
 											<vk:Viewport id="viewport" width="100%" height="300px"/>
 											<vk:SceneTree id="scenetree" width="100%" height="20%"/>
@@ -73,17 +80,18 @@
 									</Panel>
 									<Panel height="90%" id="calendarPanel">
 										<VBox>
-											<PlanningCalendar id="calendar" showRowHeaders="false" startDate="{path: '/startDate'}" viewKey="Day" rows="{path: '/people'}"
-												appointmentsVisualization="Filled" appointmentSelect="handleAppointmentSelect" intervalSelect="handleIntervalSelect"
-												showEmptyIntervalHeaders="false">
+											<PlanningCalendar id="calendar" startDate="{path: '/startDate'}" rows="{path: '/equipments'}" appointmentsVisualization="Filled"
+												appointmentSelect="handleAppointmentSelect" showEmptyIntervalHeaders="false">
 												<toolbarContent>
-													<Title text="Maintenance Calendar" titleStyle="H4"/>
-													<ToolbarSpacer/>
-													<ToggleButton icon="sap-icon://decrease-line-height" tooltip="Toggle Day Names Line" press="toggleDayNamesLine"/>
+													<Title text="Title" titleStyle="H4"/>
 												</toolbarContent>
 												<rows>
-													<PlanningCalendarRow appointments="{path : 'appointments', templateShareable: 'true'}"
+													<PlanningCalendarRow icon="{pic}" title="{name}" text="Equipment" appointments="{path : 'appointments', templateShareable: 'true'}"
 														intervalHeaders="{path: 'headers', templateShareable: 'true'}">
+														<customData>
+															<core:CustomData key="emp-name" value="{name}" writeToDom="true"/>
+															<core:CustomData key="visible" value="{visible}" writeToDom="true"/>
+														</customData>
 														<appointments>
 															<unified:CalendarAppointment startDate="{start}" endDate="{end}" icon="{pic}" title="{title}" text="{info}" type="{type}"
 																tentative="{tentative}"></unified:CalendarAppointment>

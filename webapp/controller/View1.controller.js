@@ -9,13 +9,17 @@ sap.ui.define([
 	"sap/ui/vk/ContentResource",
 	"sap/ui/vk/ContentConnector",
 	"sap/ui/vk/dvl/ViewStateManager",
-	"sap/m/MessageToast"
+	"sap/m/MessageToast",
+	"sap/ui/model/Filter", 
+	"sap/ui/model/FilterOperator"
 ], function(Controller) {
 	"use strict";
 
 	return Controller.extend("com.gv.nge.NetworkGraphEqui.controller.View1", {
 		STARTING_PROFILE: "9878787",
 		onInit: function() {
+			var view = this.getView();
+
 			this._oModel = new sap.ui.model.json.JSONModel("data/graph.json");
 			this._oModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 
@@ -104,7 +108,7 @@ sap.ui.define([
 
 			// VIEWER CON 3 COMPONENTI SEPARATE
 			//viewer
-			var view = this.getView();
+			//	var view = this.getView();
 			var oViewport = view.byId("viewport");
 			var sceneTree = view.byId("scenetree");
 			var stepNavigation = view.byId("stepnavigation");
@@ -114,6 +118,8 @@ sap.ui.define([
 				sourceType: "vds",
 				sourceId: "abc123"
 			});
+
+			//view.byId("vToolbarTitle").setContent("9582900275.vds");
 			//Constructor for a new content connector
 			var contentConnector = new sap.ui.vk.ContentConnector("abcd");
 
@@ -149,37 +155,20 @@ sap.ui.define([
 			viewer.setShowSceneTree(false);*/
 
 			/// SET PANEL LAYOUTS
-			/*var l1 = new sap.ui.layout.SplitterLayoutData({
-				size: "30%"
+			var l1 = new sap.ui.layout.SplitterLayoutData({
+				size: "20%"
 			});
 			this.getView().byId("masterPanel").setLayoutData(l1);
-			
-			
-			var h1 = new sap.ui.layout.SplitterLayoutData({
-				size: "50%"
-			});
-			this.getView().byId("networkPanel").setLayoutData(h1);
-			var h2 = new sap.ui.layout.SplitterLayoutData({
-				size: "50%"
-			});
-			this.getView().byId("viewerPanel").setLayoutData(h2);*/
 
-			/*var toolbarHeight = new sap.ui.layout.SplitterLayoutData({
-				size: "100px",
-				resizable: false
+			var l2 = new sap.ui.layout.SplitterLayoutData({
+				size: "40%"
 			});
-			this.getView().byId("toolbarPanel").setLayoutData(toolbarHeight);
+			this.getView().byId("networkPanel").setLayoutData(l2);
 
-			var viewerHeight = new sap.ui.layout.SplitterLayoutData({
-				resizable: false
+			var l3 = new sap.ui.layout.SplitterLayoutData({
+				size: "40%"
 			});
-			this.getView().byId("viewerPanel").setLayoutData(viewerHeight);
-
-			var testHeight = new sap.ui.layout.SplitterLayoutData({
-				size: "0px",
-				resizable: false
-			});
-			this.getView().byId("test").setLayoutData(testHeight);*/
+			this.getView().byId("multiPanel").setLayoutData(l3);
 
 			// Gestione dati masterlist
 			//var oModel = new sap.ui.model.json.JSONModel("data/masterList.json");//jQuery.sap.getModulePath("sap.ui.demo.mock", "/products.json"));
@@ -194,178 +183,63 @@ sap.ui.define([
 
 			// DATI CALENDAR
 			this._cModel = new sap.ui.model.json.JSONModel();
+
 			this._cModel.setData({
-				startDate: new Date("2017", "0", "08", "8", "0"),
-				people: [{
-					name: "John Miller",
+				startDate: new Date("2017", "0", "15", "8", "0"),
+				equipments: [{
+					pic: "data/images/9767676.jpg",
+					name: "Mechanical Arm Model 192.3A",
+					visible: false,
 					appointments: [{
-						start: new Date("2016", "10", "15", "10", "0"),
-						end: new Date("2016", "11", "25", "12", "0"),
-						title: "Team collaboration",
-						info: "room 1",
-						type: "Type01",
-						pic: "sap-icon://sap-ui5",
-						tentative: false
-					}, {
-						start: new Date("2016", "09", "13", "9", "0"),
-						end: new Date("2016", "01", "09", "10", "0"),
-						title: "Reminder",
-						type: "Type06"
-					}, {
-						start: new Date("2016", "07", "10", "0", "0"),
-						end: new Date("2016", "09", "16", "23", "59"),
-						title: "Vacation",
-						info: "out of office",
-						type: "Type04",
-						tentative: false
-					}, {
-						start: new Date("2016", "07", "1", "0", "0"),
-						end: new Date("2016", "09", "31", "23", "59"),
-						title: "New quarter",
-						type: "Type10",
-						tentative: false
-					}, {
-						start: new Date("2017", "0", "03", "0", "01"),
-						end: new Date("2017", "0", "04", "23", "59"),
-						title: "Workshop",
-						info: "regular",
-						type: "Type07",
-						pic: "sap-icon://sap-ui5",
-						tentative: false
-					}, {
-						start: new Date("2017", "0", "05", "08", "30"),
-						end: new Date("2017", "0", "05", "09", "30"),
-						title: "Meet Donna Moore",
+						start: new Date("2017", "0", "8", "08", "30"),
+						end: new Date("2017", "0", "8", "09", "30"),
+						title: "Meet Max Mustermann",
 						type: "Type02",
 						tentative: false
-					}, {
-						start: new Date("2017", "0", "08", "10", "0"),
-						end: new Date("2017", "0", "08", "12", "0"),
-						title: "Team meeting",
-						info: "room 1",
-						type: "Type01",
-						pic: "sap-icon://sap-ui5",
-						tentative: false
-					}, {
-						start: new Date("2017", "0", "09", "0", "0"),
-						end: new Date("2017", "0", "09", "23", "59"),
-						title: "Vacation",
-						info: "out of office",
-						type: "Type02",
-						tentative: false
-					}, {
-						start: new Date("2017", "0", "11", "0", "0"),
-						end: new Date("2017", "0", "12", "23", "59"),
-						title: "Education",
-						info: "",
-						type: "Type03",
-						tentative: false
-					}, {
-						start: new Date("2017", "0", "16", "00", "30"),
-						end: new Date("2017", "0", "16", "23", "30"),
-						title: "New Product",
-						info: "room 105",
-						type: "Type04",
-						tentative: true
-					}, {
-						start: new Date("2017", "0", "18", "11", "30"),
-						end: new Date("2017", "0", "18", "13", "30"),
-						title: "Lunch",
-						info: "canteen",
-						type: "Type03",
-						tentative: true
-					}, {
-						start: new Date("2017", "0", "20", "11", "30"),
-						end: new Date("2017", "0", "20", "13", "30"),
-						title: "Lunch",
-						info: "canteen",
-						type: "Type03",
-						tentative: true
-					}, {
-						start: new Date("2017", "0", "18", "0", "01"),
-						end: new Date("2017", "0", "19", "23", "59"),
-						title: "Working out of the building",
-						type: "Type07",
-						pic: "sap-icon://sap-ui5",
-						tentative: false
-					}, {
-						start: new Date("2017", "0", "23", "08", "00"),
-						end: new Date("2017", "0", "24", "18", "30"),
+					}, ]
+				}, {
+					pic: "data/images/9878787.jpg",
+					name: "Industrial Packer 78",
+					visible: true,
+					appointments: [{
+						start: new Date("2017", "0", "10", "18", "00"),
+						end: new Date("2017", "0", "10", "19", "10"),
 						title: "Discussion of the plan",
 						info: "Online meeting",
 						type: "Type04",
 						tentative: false
 					}, {
-						start: new Date("2017", "0", "25", "0", "01"),
-						end: new Date("2017", "0", "26", "23", "59"),
-						title: "Workshop",
-						info: "regular",
-						type: "Type07",
-						pic: "sap-icon://sap-ui5",
-						tentative: false
-					}, {
-						start: new Date("2017", "2", "30", "10", "0"),
-						end: new Date("2017", "4", "33", "12", "0"),
-						title: "Working out of the building",
-						type: "Type07",
-						pic: "sap-icon://sap-ui5",
-						tentative: false
-					}, {
-						start: new Date("2017", "8", "1", "00", "30"),
-						end: new Date("2017", "10", "15", "23", "30"),
-						title: "Development of a new Product",
-						info: "room 207",
-						type: "Type03",
-						tentative: true
-					}, {
-						start: new Date("2017", "1", "15", "10", "0"),
-						end: new Date("2017", "2", "25", "12", "0"),
-						title: "Team collaboration",
-						info: "room 1",
-						type: "Type01",
-						pic: "sap-icon://sap-ui5",
-						tentative: false
-					}, {
-						start: new Date("2017", "2", "13", "9", "0"),
-						end: new Date("2017", "3", "09", "10", "0"),
-						title: "Reminder",
-						type: "Type06"
-					}, {
-						start: new Date("2017", "03", "10", "0", "0"),
-						end: new Date("2017", "05", "16", "23", "59"),
-						title: "Vacation",
-						info: "out of office",
+						start: new Date("2017", "0", "15", "08", "00"),
+						end: new Date("2017", "0", "15", "09", "30"),
+						title: "Discussion of the plan",
+						info: "Online meeting",
 						type: "Type04",
-						tentative: false
-					}, {
-						start: new Date("2017", "07", "1", "0", "0"),
-						end: new Date("2017", "09", "31", "23", "59"),
-						title: "New quarter",
-						type: "Type10",
 						tentative: false
 					}],
 					headers: [{
-						start: new Date("2017", "0", "08", "0", "0"),
-						end: new Date("2017", "0", "08", "23", "59"),
-						title: "National holiday",
-						type: "Type04"
-					}, {
-						start: new Date("2017", "0", "10", "0", "0"),
-						end: new Date("2017", "0", "10", "23", "59"),
-						title: "Birthday",
+						start: new Date("2017", "0", "15", "9", "0"),
+						end: new Date("2017", "0", "15", "10", "0"),
+						title: "Payment reminder",
 						type: "Type06"
 					}, {
-						start: new Date("2017", "0", "17", "0", "0"),
-						end: new Date("2017", "0", "17", "23", "59"),
-						title: "Reminder",
+						start: new Date("2017", "0", "15", "16", "30"),
+						end: new Date("2017", "0", "15", "18", "00"),
+						title: "Private appointment",
 						type: "Type06"
 					}]
 				}]
 			});
 			this.getView().byId("calendar").setModel(this._cModel);
+		   
+		   // Filter the calendar rows shown
+		   var oFilter1 = new sap.ui.model.Filter("visible", sap.ui.model.FilterOperator.EQ, true);
+			this.getView().byId("calendar").getBinding("rows").filter(oFilter1);
 
-			var oPanel = this.getView().byId("calendarPanel");
-			oPanel.setVisible(false);
+			// Hide some components
+			view.byId("calendarPanel").setVisible(false);
+			view.byId("scenetree").setVisible(false);
+			view.byId("stepnavigation").setVisible(false);
+
 		},
 
 		search: function(oEvent) {
@@ -532,6 +406,9 @@ sap.ui.define([
 			sap.m.MessageToast.show("Pressed : " + evt.getSource().getTitle());
 		},
 
+		//////////////////////////////////////////////////////////////
+		// MULTI PANEL HANDLERS
+		/////////////////////////////////////////////////////////////
 		switchSubView: function(oEvent) {
 			var key = oEvent.getSource().getSelectedKey();
 
@@ -548,37 +425,75 @@ sap.ui.define([
 			}
 		},
 
-			handleAppointmentSelect: function (oEvent) {
-				var oAppointment = oEvent.getParameter("appointment");
-				if (oAppointment) {
-					sap.m.MessageBox.show("Appointment selected: " + oAppointment.getTitle());
-				} else {
-					var aAppointments = oEvent.getParameter("appointments");
-					var sValue = aAppointments.length + " Appointments selected";
-					sap.m.MessageBox.show(sValue);
-				}
-			},
+		//////////////////////////////////////////////////////////////
+		// END MULTI PANEL HANDLERS
+		/////////////////////////////////////////////////////////////
 
-			handleIntervalSelect: function (oEvent) {
-				var oStartDate = oEvent.getParameter("startDate");
-				var oEndDate = oEvent.getParameter("endDate");
-				var oModel = this.getView().getModel();
-				var oData = oModel.getData();
-				var oAppointment = {
-					start: oStartDate,
-					end: oEndDate,
-					title: "new appointment",
-					type: "Type09"
-				};
-
-				oData.people[0].appointments.push(oAppointment);
-				oModel.setData(oData);
-			},
-
-			toggleDayNamesLine: function (oEvent) {
-				var oPC = this.getView().byId("calendar");
-				oPC.setShowDayNamesLine(!oPC.getShowDayNamesLine());
+		//////////////////////////////////////////////////////////////
+		// CALENDAR HANDLERS
+		/////////////////////////////////////////////////////////////
+		handleAppointmentSelect: function(oEvent) {
+			var oAppointment = oEvent.getParameter("appointment");
+			if (oAppointment) {
+				sap.m.MessageBox.show("Appointment selected: " + oAppointment.getTitle());
+			} else {
+				var aAppointments = oEvent.getParameter("appointments");
+				var sValue = aAppointments.length + " Appointments selected";
+				sap.m.MessageBox.show(sValue);
 			}
+		},
+
+		handleIntervalSelect: function(oEvent) {
+			var oStartDate = oEvent.getParameter("startDate");
+			var oEndDate = oEvent.getParameter("endDate");
+			var oModel = this.getView().getModel();
+			var oData = oModel.getData();
+			var oAppointment = {
+				start: oStartDate,
+				end: oEndDate,
+				title: "new appointment",
+				type: "Type09"
+			};
+
+			oData.people[0].appointments.push(oAppointment);
+			oModel.setData(oData);
+		},
+
+		toggleDayNamesLine: function(oEvent) {
+			var oPC = this.getView().byId("calendar");
+			oPC.setShowDayNamesLine(!oPC.getShowDayNamesLine());
+		},
+		//////////////////////////////////////////////////////////////
+		// END CALENDAR HANDLERS
+		/////////////////////////////////////////////////////////////	
+
+		//////////////////////////////////////////////////////////////
+		// VIEWER TOOLBAR HANDLERS
+		/////////////////////////////////////////////////////////////
+		onTreeToggle: function(oEvent) {
+			if (oEvent.getSource().getPressed()) {
+				this.getView().byId("scenetree").setVisible(true);
+			} else {
+				this.getView().byId("scenetree").setVisible(false);
+			}
+		},
+
+		onStepToggle: function(oEvent) {
+			if (oEvent.getSource().getPressed()) {
+				this.getView().byId("stepnavigation").setVisible(true);
+			} else {
+				this.getView().byId("stepnavigation").setVisible(false);
+			}
+		},
+
+		onFullScreen: function(oEvent) {
+				//div {
+				//	position: absolute;top: 0;right: 0;bottom: 0;left: 0;
+				//}
+			}
+			//////////////////////////////////////////////////////////////
+			// END VIEWER TOOLBAR HANDLERS
+			/////////////////////////////////////////////////////////////		
 
 	});
 });

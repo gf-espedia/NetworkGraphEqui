@@ -1,193 +1,51 @@
 {
-    "startDate": "2017-01-08T07:00:00.000Z",
-    "people": [
+    "startDate": "2017-01-01T07:00:00.000Z",
+    "equipments": [
         {
-            "name": "John Miller",
+            "pic": "data/images/9767676.jpg",
+            "name": "Mechanical Arm Model 192.3A",
             "appointments": [
                 {
-                    "start": "2016-11-15T09:00:00.000Z",
-                    "end": "2016-12-25T11:00:00.000Z",
-                    "title": "Team collaboration",
-                    "info": "room 1",
-                    "type": "Type01",
-                    "pic": "sap-icon://sap-ui5",
-                    "tentative": false
-                },
-                {
-                    "start": "2016-10-13T07:00:00.000Z",
-                    "end": "2016-02-09T09:00:00.000Z",
-                    "title": "Reminder",
-                    "type": "Type06"
-                },
-                {
-                    "start": "2016-08-09T22:00:00.000Z",
-                    "end": "2016-10-16T21:59:00.000Z",
-                    "title": "Vacation",
-                    "info": "out of office",
-                    "type": "Type04",
-                    "tentative": false
-                },
-                {
-                    "start": "2016-07-31T22:00:00.000Z",
-                    "end": "2016-10-31T22:59:00.000Z",
-                    "title": "New quarter",
-                    "type": "Type10",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-01-02T23:01:00.000Z",
-                    "end": "2017-01-04T22:59:00.000Z",
-                    "title": "Workshop",
-                    "info": "regular",
-                    "type": "Type07",
-                    "pic": "sap-icon://sap-ui5",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-01-05T07:30:00.000Z",
-                    "end": "2017-01-05T08:30:00.000Z",
-                    "title": "Meet Donna Moore",
+                    "start": "2017-01-08T07:30:00.000Z",
+                    "end": "2017-01-08T08:30:00.000Z",
+                    "title": "Meet Max Mustermann",
                     "type": "Type02",
                     "tentative": false
-                },
+                }
+            ]
+        },
+        {
+            "pic": "data/images/9878787.jpg",
+            "name": "Industrial Packer 78",
+            "appointments": [
                 {
-                    "start": "2017-01-08T09:00:00.000Z",
-                    "end": "2017-01-08T11:00:00.000Z",
-                    "title": "Team meeting",
-                    "info": "room 1",
-                    "type": "Type01",
-                    "pic": "sap-icon://sap-ui5",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-01-08T23:00:00.000Z",
-                    "end": "2017-01-09T22:59:00.000Z",
-                    "title": "Vacation",
-                    "info": "out of office",
-                    "type": "Type02",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-01-10T23:00:00.000Z",
-                    "end": "2017-01-12T22:59:00.000Z",
-                    "title": "Education",
-                    "info": "",
-                    "type": "Type03",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-01-15T23:30:00.000Z",
-                    "end": "2017-01-16T22:30:00.000Z",
-                    "title": "New Product",
-                    "info": "room 105",
-                    "type": "Type04",
-                    "tentative": true
-                },
-                {
-                    "start": "2017-01-18T10:30:00.000Z",
-                    "end": "2017-01-18T12:30:00.000Z",
-                    "title": "Lunch",
-                    "info": "canteen",
-                    "type": "Type03",
-                    "tentative": true
-                },
-                {
-                    "start": "2017-01-20T10:30:00.000Z",
-                    "end": "2017-01-20T12:30:00.000Z",
-                    "title": "Lunch",
-                    "info": "canteen",
-                    "type": "Type03",
-                    "tentative": true
-                },
-                {
-                    "start": "2017-01-17T23:01:00.000Z",
-                    "end": "2017-01-19T22:59:00.000Z",
-                    "title": "Working out of the building",
-                    "type": "Type07",
-                    "pic": "sap-icon://sap-ui5",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-01-23T07:00:00.000Z",
-                    "end": "2017-01-24T17:30:00.000Z",
+                    "start": "2017-01-10T17:00:00.000Z",
+                    "end": "2017-01-10T18:10:00.000Z",
                     "title": "Discussion of the plan",
                     "info": "Online meeting",
                     "type": "Type04",
                     "tentative": false
                 },
                 {
-                    "start": "2017-01-24T23:01:00.000Z",
-                    "end": "2017-01-26T22:59:00.000Z",
-                    "title": "Workshop",
-                    "info": "regular",
-                    "type": "Type07",
-                    "pic": "sap-icon://sap-ui5",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-03-30T08:00:00.000Z",
-                    "end": "2017-06-02T10:00:00.000Z",
-                    "title": "Working out of the building",
-                    "type": "Type07",
-                    "pic": "sap-icon://sap-ui5",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-08-31T22:30:00.000Z",
-                    "end": "2017-11-15T22:30:00.000Z",
-                    "title": "Development of a new Product",
-                    "info": "room 207",
-                    "type": "Type03",
-                    "tentative": true
-                },
-                {
-                    "start": "2017-02-15T09:00:00.000Z",
-                    "end": "2017-03-25T11:00:00.000Z",
-                    "title": "Team collaboration",
-                    "info": "room 1",
-                    "type": "Type01",
-                    "pic": "sap-icon://sap-ui5",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-03-13T08:00:00.000Z",
-                    "end": "2017-04-09T08:00:00.000Z",
-                    "title": "Reminder",
-                    "type": "Type06"
-                },
-                {
-                    "start": "2017-04-09T22:00:00.000Z",
-                    "end": "2017-06-16T21:59:00.000Z",
-                    "title": "Vacation",
-                    "info": "out of office",
+                    "start": "2017-01-15T07:00:00.000Z",
+                    "end": "2017-01-15T08:30:00.000Z",
+                    "title": "Discussion of the plan",
+                    "info": "Online meeting",
                     "type": "Type04",
-                    "tentative": false
-                },
-                {
-                    "start": "2017-07-31T22:00:00.000Z",
-                    "end": "2017-10-31T22:59:00.000Z",
-                    "title": "New quarter",
-                    "type": "Type10",
                     "tentative": false
                 }
             ],
             "headers": [
                 {
-                    "start": "2017-01-07T23:00:00.000Z",
-                    "end": "2017-01-08T22:59:00.000Z",
-                    "title": "National holiday",
-                    "type": "Type04"
-                },
-                {
-                    "start": "2017-01-09T23:00:00.000Z",
-                    "end": "2017-01-10T22:59:00.000Z",
-                    "title": "Birthday",
+                    "start": "2017-01-15T08:00:00.000Z",
+                    "end": "2017-01-15T09:00:00.000Z",
+                    "title": "Payment reminder",
                     "type": "Type06"
                 },
                 {
-                    "start": "2017-01-16T23:00:00.000Z",
-                    "end": "2017-01-17T22:59:00.000Z",
-                    "title": "Reminder",
+                    "start": "2017-01-15T15:30:00.000Z",
+                    "end": "2017-01-15T17:00:00.000Z",
+                    "title": "Private appointment",
                     "type": "Type06"
                 }
             ]
