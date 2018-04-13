@@ -1,6 +1,6 @@
 <mvc:View controllerName="com.gv.nge.NetworkGraphEqui.controller.View1" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:vk="sap.ui.vk"
-	displayBlock="true" xmlns="sap.m" xmlns:ng="sap.suite.ui.commons.networkgraph">
+	xmlns:unified="sap.ui.unified" displayBlock="true" xmlns="sap.m" xmlns:ng="sap.suite.ui.commons.networkgraph">
 	<App id="idAppControl">
 		<pages>
 			<Page title="{i18n>title}">
@@ -28,7 +28,7 @@
 							</l:SplitPane>
 							<l:SplitPane requiredParentWidth="400" id="networkPanel">
 								<Panel headerText="Component Tree" height="100%">
-									<ng:Graph orientation="LeftRight" id="graph" layout="Layered" searchSuggest="suggest" search="search" nodes="{/nodes}" lines="{/lines}">
+									<ng:Graph orientation="TopBottom" id="graph" layout="Layered" searchSuggest="suggest" search="search" nodes="{/nodes}" lines="{/lines}">
 										<ng:layoutAlgorithm>
 											<layout:LayeredLayout mergeEdges="true" nodePlacement="Simple" nodeSpacing="40"/>
 										</ng:layoutAlgorithm>
@@ -61,7 +61,7 @@
 								</Panel>
 							</l:SplitPane>
 							<l:PaneContainer orientation="Vertical">
-								<l:SplitPane requiredParentWidth="800" id="toolbarPanel">
+								<l:SplitPane requiredParentWidth="800" id="toolbarPanel" demandPane="false">
 									<Panel height="100px">
 										<Toolbar>
 											<ToolbarSpacer/>
@@ -84,10 +84,35 @@
 										</VBox>
 									</Panel>
 								</l:SplitPane>
-								<l:SplitPane requiredParentWidth="100" id="test">
-									<Panel headerText="TEST" height="100%">
+								<l:SplitPane requiredParentWidth="100" id="calendarPanel">
+									<Panel headerText="Calendar" height="100%">
 										<VBox>
-											<html:p>TEST</html:p>
+											<PlanningCalendar id="calendar" showRowHeaders="false" startDate="{path: '/startDate'}" viewKey="Day" rows="{path: '/people'}"
+												appointmentsVisualization="Filled" appointmentSelect="handleAppointmentSelect" intervalSelect="handleIntervalSelect"
+												showEmptyIntervalHeaders="false">
+												<toolbarContent>
+													<Title text="Title" titleStyle="H4"/>
+													<ToolbarSpacer/>
+													<ToggleButton icon="sap-icon://decrease-line-height" tooltip="Toggle Day Names Line" press="toggleDayNamesLine"/>
+												</toolbarContent>
+												<rows>
+													<PlanningCalendarRow appointments="{path : 'appointments', templateShareable: 'true'}"
+														intervalHeaders="{path: 'headers', templateShareable: 'true'}">
+														<appointments>
+															<unified:CalendarAppointment startDate="{start}" endDate="{end}" icon="{pic}" title="{title}" text="{info}" type="{type}"
+																tentative="{tentative}"></unified:CalendarAppointment>
+														</appointments>
+														<intervalHeaders>
+															<unified:CalendarAppointment startDate="{start}" endDate="{end}" icon="{pic}" title="{title}" type="{type}"></unified:CalendarAppointment>
+														</intervalHeaders>
+													</PlanningCalendarRow>
+												</rows>
+											</PlanningCalendar>
+											<!--
+											 
+											 
+											 
+											-->
 										</VBox>
 									</Panel>
 								</l:SplitPane>
