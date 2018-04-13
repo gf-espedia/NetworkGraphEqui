@@ -76,7 +76,7 @@
 											<vk:StepNavigation id="stepnavigation" height="20%"/>
 											<vk:Viewport id="viewport" height="550px"/>
 											<vk:SceneTree id="scenetree" width="100%" height="20%"/>-->
-											<vk:Viewer id="viewer" width="100%" height="550px"/>
+											<vk:Viewer id="viewer" showSceneTree="false" width="100%" height="600px"/>
 										</VBox>
 									</Panel>
 									<Panel height="90%" id="calendarPanel">

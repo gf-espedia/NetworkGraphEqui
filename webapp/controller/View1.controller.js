@@ -239,8 +239,7 @@ sap.ui.define([
 			view.byId("calendarPanel").setVisible(false);
 			//view.byId("scenetree").setVisible(false);
 			//view.byId("stepnavigation").setVisible(false);
-			view.byId("viewer").setShowSceneTree(false);
-			view.byId("viewer").setShowSceneTree(true);
+			//view.byId("viewer").setShowSceneTree(false);
 		},
 
 		search: function(oEvent) {
