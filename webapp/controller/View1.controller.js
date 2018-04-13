@@ -109,7 +109,7 @@ sap.ui.define([
 			// VIEWER CON 3 COMPONENTI SEPARATE
 			//viewer
 			//	var view = this.getView();
-			var oViewport = view.byId("viewport");
+			/*var oViewport = view.byId("viewport");
 			var sceneTree = view.byId("scenetree");
 			var stepNavigation = view.byId("stepnavigation");
 
@@ -142,17 +142,17 @@ sap.ui.define([
 			view.addDependent(contentConnector).addDependent(viewStateManager);
 
 			//Add resource to load to content connector
-			contentConnector.addContentResource(contentResource);
+			contentConnector.addContentResource(contentResource);*/
 
 			// COMPONENTE VIEWER UNICA
-			/*var viewer = this.getView().byId("viewer");
+			var viewer = this.getView().byId("viewer");
 			var contentResource = new sap.ui.vk.ContentResource({
 				source: "data/9582900275.vds",
 				sourceType: "vds",
 				sourceId: "abc123"
 			});
 			viewer.addContentResource(contentResource);
-			viewer.setShowSceneTree(false);*/
+			viewer.setShowSceneTree(false);
 
 			/// SET PANEL LAYOUTS
 			var l1 = new sap.ui.layout.SplitterLayoutData({
@@ -237,9 +237,10 @@ sap.ui.define([
 
 			// Hide some components
 			view.byId("calendarPanel").setVisible(false);
-			view.byId("scenetree").setVisible(false);
-			view.byId("stepnavigation").setVisible(false);
-
+			//view.byId("scenetree").setVisible(false);
+			//view.byId("stepnavigation").setVisible(false);
+			view.byId("viewer").setShowSceneTree(false);
+			view.byId("viewer").setShowSceneTree(true);
 		},
 
 		search: function(oEvent) {
@@ -362,17 +363,17 @@ sap.ui.define([
 			if (!selected) {
 				this.selectViewerNode(key);
 			} else {
-				var vsmId = this.getView().byId("viewport").getViewStateManager();
-				var vsm = sap.ui.getCore().byId(vsmId);
-				//var vsm = this.getView().byId("viewer").getViewStateManager();
+				//var vsmId = this.getView().byId("viewport").getViewStateManager();
+				//var vsm = sap.ui.getCore().byId(vsmId);
+				var vsm = this.getView().byId("viewer").getViewStateManager();
 				vsm.enumerateSelection(this.clearSelection.bind(this));
 			}
 		},
 
 		selectViewerNode: function(key) {
-			var vsmId = this.getView().byId("viewport").getViewStateManager();
-			var vsm = sap.ui.getCore().byId(vsmId);
-			//var vsm = this.getView().byId("viewer").getViewStateManager();
+			//var vsmId = this.getView().byId("viewport").getViewStateManager();
+			//var vsm = sap.ui.getCore().byId(vsmId);
+			var vsm = this.getView().byId("viewer").getViewStateManager();
 			var nh = vsm.getNodeHierarchy();
 			vsm.enumerateSelection(this.clearSelection.bind(this));
 
@@ -396,9 +397,9 @@ sap.ui.define([
 		},
 
 		clearSelection: function(id) {
-			var vsmId = this.getView().byId("viewport").getViewStateManager();
-			var vsm = sap.ui.getCore().byId(vsmId);
-			//var vsm = this.getView().byId("viewer").getViewStateManager();
+			//var vsmId = this.getView().byId("viewport").getViewStateManager();
+			//var vsm = sap.ui.getCore().byId(vsmId);
+			var vsm = this.getView().byId("viewer").getViewStateManager();
 			vsm.setSelectionState(id, false, true);
 		},
 
@@ -471,11 +472,18 @@ sap.ui.define([
 		// VIEWER TOOLBAR HANDLERS
 		/////////////////////////////////////////////////////////////
 		onTreeToggle: function(oEvent) {
+			var vpHeight = this.getView().byId("viewport").getHeight();
+			vpHeight = parseInt(/(\d+)px/gi.exec(vpHeight)[1], 10);
 			if (oEvent.getSource().getPressed()) {
 				this.getView().byId("scenetree").setVisible(true);
+				vpHeight = vpHeight - 200;
 			} else {
 				this.getView().byId("scenetree").setVisible(false);
+				vpHeight = vpHeight + 200;
 			}
+							vpHeight = vpHeight + "px";
+			var ls = new sap.ui.core.LayoutData({"height": vpHeight});
+			this.getView().byId("viewport").setLayoutData(ls);
 		},
 
 		onStepToggle: function(oEvent) {
