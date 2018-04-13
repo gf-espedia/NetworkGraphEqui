@@ -9,20 +9,8 @@
 						<l:PaneContainer>
 							<l:SplitPane requiredParentWidth="800" id="masterPanel">
 								<Panel headerText="Master List" height="100%">
-									<List id="masterList" items="{/ProductCollection}" headerText="Products">
-										<items>
-											<ObjectListItem title="{Name}" type="Active" press="onListItemPress"
-												number="{ parts:[{path:'Price'},{path:'CurrencyCode'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-												numberUnit="{CurrencyCode}">
-												<!--<firstStatus>
-														<ObjectStatus text="{Status}" state="{ path: 'Status' }"/>
-													</firstStatus>
-													<attributes>
-														<ObjectAttribute text="{WeightMeasure} {WeightUnit}"/>
-														<ObjectAttribute text="{Width} x {Depth} x {Height} {DimUnit}"/>
-													</attributes>-->
-											</ObjectListItem>
-										</items>
+									<List id="masterList" headerText="Products" items="{ path: '/ProductCollection' }">
+										<StandardListItem title="{Name}" counter="{Quantity}"/>
 									</List>
 								</Panel>
 							</l:SplitPane>
@@ -89,7 +77,7 @@
 												appointmentsVisualization="Filled" appointmentSelect="handleAppointmentSelect" intervalSelect="handleIntervalSelect"
 												showEmptyIntervalHeaders="false">
 												<toolbarContent>
-													<Title text="Title" titleStyle="H4"/>
+													<Title text="Maintenance Calendar" titleStyle="H4"/>
 													<ToolbarSpacer/>
 													<ToggleButton icon="sap-icon://decrease-line-height" tooltip="Toggle Day Names Line" press="toggleDayNamesLine"/>
 												</toolbarContent>
