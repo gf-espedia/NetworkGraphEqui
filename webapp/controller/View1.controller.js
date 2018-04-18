@@ -241,6 +241,7 @@ sap.ui.define([
 			this._nModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 			this.getView().byId("notificationsList").setModel(this._nModel);
 
+			this._orModel = new sap.ui.model.json.JSONModel("data/orderData.json");
 			// Hide some components
 			view.byId("calendarPanel").setVisible(false);
 			view.byId("notifPanel").setVisible(false);
@@ -386,7 +387,94 @@ sap.ui.define([
 		},
 
 		onNotifListItemPress: function(oEvent) {
-			sap.m.MessageToast.show("Pressed : " + oEvent.getSource().getTitle());
+			//sap.m.MessageToast.show("Pressed : " + oEvent.getSource().getTitle());
+			var notif = oEvent.getSource().getTitle();
+			var oTable = new sap.m.Table();
+			oTable.addColumn(new sap.m.Column({
+				header: new sap
+					.m
+					.Label({
+						text: "Activity"
+					}),
+				vAlign: "Middle"
+			}));
+			oTable.addColumn(new sap.m.Column({
+				header: new sap
+					.m
+					.Label({
+						text: "Description"
+					}),
+				vAlign: "Middle"
+			}));
+			oTable.addColumn(new sap.m.Column({
+				header: new sap
+					.m
+					.Label({
+						text: "Work Center"
+					}),
+				vAlign: "Middle"
+			}));
+			oTable.addColumn(new sap.m.Column({
+				header: new sap
+					.m
+					.Label({
+						text: "Vendor Number"
+					}),
+				vAlign: "Middle"
+			}));
+			var oTemplate = new sap.m.ColumnListItem({
+				type: sap.m.ListType.Inactive,
+				cells: [
+					new sap.m.Label({
+						text: "{activity}"
+					}),
+					new sap.m.Label({
+						text: "{description}"
+					}), 
+					new sap.m.Label({
+						text: "{work_cntr}"
+					}), 
+					new sap.m.Label({
+						text: "{vendor_no}"
+					})
+					
+				]
+			});
+
+			oTable.setModel(this._orModel);
+			var orders = this._orModel.getData().Orders;
+			var index = orders.findIndex(function(el) {
+				return el.notif === notif;
+			});
+			if (index > -1) {
+				var path = "/Orders/" + index + "/operations";
+				oTable.bindAggregation("items", path, oTemplate);
+
+				//var oFilter1 = new sap.ui.model.Filter("notif", sap.ui.model.FilterOperator.EQ, notif);
+				//oTable.getBinding("items").filter(oFilter1);
+				//debugger;
+				var ordersDialog = new sap.m.Dialog({
+					title: "Operations for Norification " + notif,
+					content: oTable,
+					contentWidth: "50%",
+					draggable: true,
+					buttons: [
+						new sap.m.Button({
+							text: "Ok",
+							type: sap.m.ButtonType.Default,
+							press: function() {
+								ordersDialog.close();
+								if (this.nodesToProcess.length > 0) {
+									(this.openQuantityDialog.bind(this))();
+								}
+							}.bind(this)
+						})
+					]
+				});
+				ordersDialog.open();
+			} else {
+				sap.m.MessageToast.show("No Operations found");
+			}
 		},
 
 		onEquiListItemPress: function(oEvent) {
