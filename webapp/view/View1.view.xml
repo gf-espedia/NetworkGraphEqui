@@ -11,6 +11,7 @@
 								<Panel headerText="Equipment" height="100%">
 									<List id="masterList" items="{ path: '/ProductCollection' }">
 										<StandardListItem title="{Name}" counter="{Quantity}"/>
+										<ObjectListItem type="Active" title="{Name}" intro="{Description} " press="onEquiListItemPress"/>
 									</List>
 								</Panel>
 							</l:SplitPane>
@@ -58,6 +59,7 @@
 													<items>
 														<SegmentedButtonItem text="Viewer" key="v3d" width="200px"/>
 														<SegmentedButtonItem text="Calendar" key="calend" width="200px"/>
+														<SegmentedButtonItem text="Notifications" key="notif" width="200px"/>
 													</items>
 												</SegmentedButton>
 												<ToolbarSpacer/>
@@ -66,7 +68,7 @@
 									</Panel>
 									<Panel height="90%" id="viewerPanel">
 										<VBox fitContainer="true">
-										<!--	<Toolbar id="viewerToolbar">
+											<!--	<Toolbar id="viewerToolbar">
 												<html:h4 id="vToolbarTitle">9582900275.vds</html:h4>
 												<ToolbarSpacer/>
 												<ToggleButton icon="sap-icon://tree" press="onTreeToggle"/>
@@ -103,6 +105,15 @@
 													</PlanningCalendarRow>
 												</rows>
 											</PlanningCalendar>
+										</VBox>
+									</Panel>
+									<Panel height="90%" id="notifPanel">
+										<VBox>
+											<List id="notificationsList" items="{ path: '/Notifications' }">
+												<items>
+													<ObjectListItem type="Active" title="{notificat}" intro="Equipment {equipment}: {descript} " icon="{icon}" press="onNotifListItemPress"/>
+												</items>
+											</List>
 										</VBox>
 									</Panel>
 								</VBox>

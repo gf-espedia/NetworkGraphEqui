@@ -10,7 +10,7 @@ sap.ui.define([
 	"sap/ui/vk/ContentConnector",
 	"sap/ui/vk/dvl/ViewStateManager",
 	"sap/m/MessageToast",
-	"sap/ui/model/Filter", 
+	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
 ], function(Controller) {
 	"use strict";
@@ -20,6 +20,9 @@ sap.ui.define([
 		onInit: function() {
 			var view = this.getView();
 
+			///////////////////////////
+			// Setup for NetworkGraph
+			///////////////////////////
 			this._oModel = new sap.ui.model.json.JSONModel("data/graph.json");
 			this._oModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 
@@ -82,7 +85,7 @@ sap.ui.define([
 					});
 					oNode.addActionButton(oDetailButton);
 
-					// if current user is root we can add 'up one level'
+					// if current equipment is root we can add 'up one level'
 					if (oNode.getKey() === this._sTopParent) {
 						sParent = this._getCustomDataValue(oNode, "parent");
 						if (sParent) {
@@ -105,6 +108,8 @@ sap.ui.define([
 				}, this);
 				this._graph.preventInvalidation(false);
 			}.bind(this));
+
+			this._graph.attachSelectionChange(this.onGraphSelectionChange, this);
 
 			// VIEWER CON 3 COMPONENTI SEPARATE
 			//viewer
@@ -144,6 +149,7 @@ sap.ui.define([
 			//Add resource to load to content connector
 			contentConnector.addContentResource(contentResource);*/
 
+			// Initialization of 3D Viewer
 			// COMPONENTE VIEWER UNICA
 			var viewer = this.getView().byId("viewer");
 			var contentResource = new sap.ui.vk.ContentResource({
@@ -170,11 +176,8 @@ sap.ui.define([
 			});
 			this.getView().byId("multiPanel").setLayoutData(l3);
 
-			// Gestione dati masterlist
-			//var oModel = new sap.ui.model.json.JSONModel("data/masterList.json");//jQuery.sap.getModulePath("sap.ui.demo.mock", "/products.json"));
-			//this.getView().setModel(oModel);
+			// Gestione dati Equipment masterlist
 			this._mModel = new sap.ui.model.json.JSONModel("data/masterList.json");
-
 			this._mModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 			this.getView().byId("masterList").setModel(this._mModel);
 
@@ -189,6 +192,7 @@ sap.ui.define([
 				equipments: [{
 					pic: "data/images/9767676.jpg",
 					name: "Mechanical Arm Model 192.3A",
+					"id": "9767676",
 					visible: false,
 					appointments: [{
 						start: new Date("2017", "0", "8", "08", "30"),
@@ -200,6 +204,7 @@ sap.ui.define([
 				}, {
 					pic: "data/images/9878787.jpg",
 					name: "Industrial Packer 78",
+					"id": "9878787",
 					visible: true,
 					appointments: [{
 						start: new Date("2017", "0", "10", "18", "00"),
@@ -230,16 +235,28 @@ sap.ui.define([
 				}]
 			});
 			this.getView().byId("calendar").setModel(this._cModel);
-		   
-		   // Filter the calendar rows shown
-		   var oFilter1 = new sap.ui.model.Filter("visible", sap.ui.model.FilterOperator.EQ, true);
-			this.getView().byId("calendar").getBinding("rows").filter(oFilter1);
+
+			// Initialize Notifications data
+			this._nModel = new sap.ui.model.json.JSONModel("data/notifData.json");
+			this._nModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
+			this.getView().byId("notificationsList").setModel(this._nModel);
 
 			// Hide some components
 			view.byId("calendarPanel").setVisible(false);
+			view.byId("notifPanel").setVisible(false);
+
 			//view.byId("scenetree").setVisible(false);
 			//view.byId("stepnavigation").setVisible(false);
 			//view.byId("viewer").setShowSceneTree(false);
+		},
+
+		onGraphSelectionChange: function(oEvent) {
+			var selectedNodes = oEvent.getSource().getNodes().filter(function(node) {
+				return node.getSelected();
+			});
+			if (selectedNodes.length < 1) {
+				this.removeFilters();
+			}
 		},
 
 		search: function(oEvent) {
@@ -361,12 +378,19 @@ sap.ui.define([
 			var selected = oEvent.getSource().getSelected();
 			if (!selected) {
 				this.selectViewerNode(key);
+				this.filterCalendar(key);
+				this.filterNotif(key);
 			} else {
-				//var vsmId = this.getView().byId("viewport").getViewStateManager();
-				//var vsm = sap.ui.getCore().byId(vsmId);
-				var vsm = this.getView().byId("viewer").getViewStateManager();
-				vsm.enumerateSelection(this.clearSelection.bind(this));
+				this.removeFilters();
 			}
+		},
+
+		onNotifListItemPress: function(oEvent) {
+			sap.m.MessageToast.show("Pressed : " + oEvent.getSource().getTitle());
+		},
+
+		onEquiListItemPress: function(oEvent) {
+			sap.m.MessageToast.show("Pressed : " + oEvent.getSource().getTitle());
 		},
 
 		selectViewerNode: function(key) {
@@ -395,6 +419,23 @@ sap.ui.define([
 			vsm.setSelectionState(node, true, true);
 		},
 
+		filterCalendar: function(key) {
+			var oFilter1 = new sap.ui.model.Filter("id", sap.ui.model.FilterOperator.EQ, key);
+			this.getView().byId("calendar").getBinding("rows").filter(oFilter1);
+		},
+
+		filterNotif: function(key) {
+			var oFilter1 = new sap.ui.model.Filter("equipment", sap.ui.model.FilterOperator.EQ, key);
+			this.getView().byId("notificationsList").getBinding("items").filter(oFilter1);
+		},
+
+		removeFilters: function() {
+			var vsm = this.getView().byId("viewer").getViewStateManager();
+			vsm.enumerateSelection(this.clearSelection.bind(this));
+			this.getView().byId("calendar").getBinding("rows").filter([]);
+			this.getView().byId("notificationsList").getBinding("items").filter([]);
+		},
+
 		clearSelection: function(id) {
 			//var vsmId = this.getView().byId("viewport").getViewStateManager();
 			//var vsm = sap.ui.getCore().byId(vsmId);
@@ -411,17 +452,22 @@ sap.ui.define([
 		/////////////////////////////////////////////////////////////
 		switchSubView: function(oEvent) {
 			var key = oEvent.getSource().getSelectedKey();
-
-			if (key === "calend") {
-				var oPanel = this.getView().byId("calendarPanel");
-				oPanel.setVisible(true);
-				var oPanel2 = this.getView().byId("viewerPanel");
-				oPanel2.setVisible(false);
-			} else if (key === "v3d") {
-				var oPanel = this.getView().byId("calendarPanel");
-				oPanel.setVisible(false);
-				var oPanel2 = this.getView().byId("viewerPanel");
-				oPanel2.setVisible(true);
+			switch (key) {
+				case "calend":
+					this.getView().byId("calendarPanel").setVisible(true);
+					this.getView().byId("viewerPanel").setVisible(false);
+					this.getView().byId("notifPanel").setVisible(false);
+					break;
+				case "v3d":
+					this.getView().byId("calendarPanel").setVisible(false);
+					this.getView().byId("viewerPanel").setVisible(true);
+					this.getView().byId("notifPanel").setVisible(false);
+					break;
+				case "notif":
+					this.getView().byId("calendarPanel").setVisible(false);
+					this.getView().byId("viewerPanel").setVisible(false);
+					this.getView().byId("notifPanel").setVisible(true);
+					break;
 			}
 		},
 
@@ -470,7 +516,7 @@ sap.ui.define([
 		//////////////////////////////////////////////////////////////
 		// VIEWER TOOLBAR HANDLERS
 		/////////////////////////////////////////////////////////////
-		onTreeToggle: function(oEvent) {
+		/*onTreeToggle: function(oEvent) {
 			var vpHeight = this.getView().byId("viewport").getHeight();
 			vpHeight = parseInt(/(\d+)px/gi.exec(vpHeight)[1], 10);
 			if (oEvent.getSource().getPressed()) {
@@ -497,10 +543,10 @@ sap.ui.define([
 				//div {
 				//	position: absolute;top: 0;right: 0;bottom: 0;left: 0;
 				//}
-			}
-			//////////////////////////////////////////////////////////////
-			// END VIEWER TOOLBAR HANDLERS
-			/////////////////////////////////////////////////////////////		
+			}*/
+		//////////////////////////////////////////////////////////////
+		// END VIEWER TOOLBAR HANDLERS
+		/////////////////////////////////////////////////////////////		
 
 	});
 });
